@@ -41,7 +41,8 @@ This guide will help you set up your environment for networking labs using Linux
 
 ### Running Server and Client Programs  
 You can create two separate WSL terminals for running server and client programs. Here's an example setup:  
-![Server and Client Terminals](image-1.png)
+![image](https://github.com/user-attachments/assets/33f9f731-c780-4307-955f-0c06b872ca60)
+
 
 ---
 
