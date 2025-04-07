@@ -80,6 +80,7 @@ int main()
         if (recvd < 0)
         {
             printf("ERROR(recv)\n");
+            return -1;
         }
         printf("CLIENT's response: %s\n", client_msg);
         // SEND data to CLIENT
@@ -89,6 +90,7 @@ int main()
         if (sent < 0)
         {
             printf("ERROR(send)\n");
+            return -1;
         }
         if (strcmp(client_msg, "exit") == 0)
             break;

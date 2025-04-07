@@ -52,12 +52,14 @@ int main()
         if (sent < 0)
         {
             printf("ERROR(send)\n");
+            return -1;
         }
         // recv data from SERVER
         int recvd = recv(client_socket, server_msg, sizeof(server_msg), 0);
         if (recvd < 0)
         {
             printf("ERROR(recv)\n");
+            return -1;
         }
         printf("SERVER's response: %s\n", server_msg);
         if (strcmp(server_msg, "exit") == 0)
