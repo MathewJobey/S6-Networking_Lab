@@ -95,6 +95,7 @@ int main()
         if (strcmp(client_msg, "exit") == 0)
             break;
     }
+    close(client_socket);
     close(server_socket);
     return 0;
 }
