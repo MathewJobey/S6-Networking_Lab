@@ -6,17 +6,15 @@
 #include<unistd.h>
 int main(){
 
-    //create socket
-    int socket_desc=socket(AF_INET,SOCK_STREAM,0);
-    //check if socket is created successfully
-    if(socket_desc<0)
+    //CREATE CLIENT socket
+    int client_socket=socket(AF_INET,SOCK_STREAM,0);//a file descriptor is returned (+ve integer)
+    if(client_socket<0)
     {
-        printf("socket creation failed\n");
+        printf("ERROR(socket creation)\n");
     }
     else
     {
         printf("socket created successfully\n");
-        printf("socket file descriptor = %d\n",socket_desc);
     }
 
     //create socket address structure that we need to connect to 
@@ -25,8 +23,8 @@ int main(){
     server_addr.sin_port=htons(2000);
     server_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
 
-    //connect to the server
-    int connection=connect(socket_desc,(struct sockaddr*)&server_addr,sizeof(server_addr));
+    //CONNECT to the SERVER
+    int connection=connect(client_socket_desc,(struct sockaddr*)&server_addr,sizeof(server_addr));
     if(connection<0)
     {
         printf("Connection Unsuccessfull\n");
@@ -36,7 +34,6 @@ int main(){
         printf("Connected to server\n");
     }
     
-    //send data to SERVER
     char client_msg[2000],server_msg[2000];
     //clear buffers
     while(1)
@@ -44,10 +41,11 @@ int main(){
         memset(server_msg,'\0',sizeof(server_msg));
         memset(client_msg,'\0',sizeof(client_msg));
 
+        //SEND data to SERVER
         printf("Enter Message: ");
         gets(client_msg);
         //send(socket_fd, buffer, length_of_data, flags) | returns no.of bytes of the msg sent
-        int sent=send(socket_desc,client_msg,sizeof(client_msg),0);
+        int sent=send(client_socket,client_msg,sizeof(client_msg),0);
         if (sent<0)
         {
             printf("ERROR\n");
@@ -57,7 +55,7 @@ int main(){
             printf("msg sent!\n");
         }
         //receive data from SERVER
-        int recvd=recv(socket_desc,server_msg,sizeof(server_msg),0);
+        int recvd=recv(client_socket,server_msg,sizeof(server_msg),0);
         if(recvd<0)
         {
             printf("ERROR\n");
@@ -70,6 +68,6 @@ int main(){
         if(strcmp(server_msg,"exit")==0)    
             break;
         } 
-    close(socket_desc);
-    return 0;
+    close(client_socket_desc);
+    return 0
 }
