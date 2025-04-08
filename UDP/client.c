@@ -30,7 +30,7 @@ int main(){
     printf("Enter msg: ");
     gets(client_msg);
     //SEND data to SERVER
-    if(sendto(client_socket,client_msg,strlen(client_msg),0,(struct sockaddr*)&server_addr,sizeof(server_addr))<0)
+    if(sendto(client_socket,client_msg,strlen(client_msg),0,(struct sockaddr*)&server_addr,sizeof(server_addr))<0)//send+connect paramenters combined
     {
         printf("ERROR(send)\n");
         return -1;
@@ -39,6 +39,7 @@ int main(){
     if(recvfrom(client_socket,server_msg,sizeof(server_msg),0,(struct sockaddr*)&server_addr,sizeof(server_addr))<0)
     {
         printf("ERROR(recv)\n");
+        return -1;
     }
     else
     {
