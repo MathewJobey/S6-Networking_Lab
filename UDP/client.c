@@ -27,16 +27,18 @@ int main(){
     //clear buffers
     memset(server_msg,'\0',sizeof(server_msg));
     memset(client_msg,'\0',sizeof(client_msg));
+    
+    int server_addr_length=sizeof(server_addr);
+    //SEND data to SERVER
     printf("Enter msg: ");
     gets(client_msg);
-    //SEND data to SERVER
-    if(sendto(client_socket,client_msg,strlen(client_msg),0,(struct sockaddr*)&server_addr,sizeof(server_addr))<0)//send+connect paramenters combined
+    if(sendto(client_socket,client_msg,strlen(client_msg),0,(struct sockaddr*)&server_addr,server_addr_length)<0)//send+connect paramenters combined
     {
         printf("ERROR(send)\n");
         return -1;
     }
     //RECV data from SERVER
-    if(recvfrom(client_socket,server_msg,sizeof(server_msg),0,(struct sockaddr*)&server_addr,sizeof(server_addr))<0)
+    if(recvfrom(client_socket,server_msg,sizeof(server_msg),0,(struct sockaddr*)&server_addr,&server_addr_length)<0)
     {
         printf("ERROR(recv)\n");
         return -1;

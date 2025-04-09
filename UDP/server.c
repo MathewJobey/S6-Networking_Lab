@@ -39,8 +39,10 @@ int main(){
     memset(server_msg,'\0',sizeof(server_msg));
     memset(client_msg,'\0',sizeof(client_msg));
 
+    int client_addr_length=sizeof(client_addr);
     //RECV data from CLIENT
-    if(recvfrom(server_socket,client_msg,strlen(client_msg),0,(struct sockaddr*)&client_addr,sizeof(client_addr),0)<0)
+    if(recvfrom(server_socket,client_msg,sizeof(client_msg),0,(struct sockaddr*)&client_addr,&client_addr_length)<0)
+    //recv from function can both read and update the value with the actual number of bytes used for the client address(client_addr_lenght).
     {
         printf("ERROR(recv)\n");
         return -1;
@@ -53,7 +55,7 @@ int main(){
     //SEND data to CLIENT
     printf("Enter msg: ");
     gets(server_msg);
-    if(sendto(server_socket,server_msg,strlen(server_msg),0,(struct sockaddr*)&client_addr,sizeof(client_addr),0)<0)
+    if(sendto(server_socket,server_msg,strlen(server_msg),0,(struct sockaddr*)&client_addr,client_addr_length)<0)
     {
         printf("ERROR(send)\n");
         return -1;      
