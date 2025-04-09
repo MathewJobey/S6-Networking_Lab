@@ -26,7 +26,7 @@ int main(){
             
             costmat[i][i]=0;//dist to itself=0
 
-            router[i].dist[j]=costmat[i][j];//initialise the distance to cost matrix
+            router[i].dist[j]=costmat[i][j];//initialise the distance of cost matrix to routing table
             router[i].from[j]=j;
         }
     }
