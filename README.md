@@ -58,3 +58,9 @@ Now you're all set to run networking code with full Linux support in VS Code on 
 ---
 
 # Experiments  
+1. Transmission Control Protocol (TCP)
+2. User Datagram Protocol (UDP)
+3. Stop and Wait ARQ (SnW)
+4. Distance Vector Routing Protocol Algorithm (DVR)
+5. File Transfer Protocol (FTP)
+6. Leaky Bucket Algorithm (LB)
